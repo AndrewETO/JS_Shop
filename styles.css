@@ -1,73 +1,75 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
   }
-   
-  .mainTitle {
-    text-align: center;
-    margin: 20px 0 50px;
-  }
   
   ul {
     padding: 0;
     list-style-type: none;
   }
-
-  .productsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-  }
-
-  .product {
-    width: 30%;
-    margin-left: 3%;
+  
+  .main-title {
+    text-align: center;
+    margin: 20px 0 50px;
   }
   
-  .productDescription {
+  .products-container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .product-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .productDescription > img {
-    height: 200px;
-  }
-
-  .productDescription > h4 {
-    height: 36px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    -webkit-box-orient: vertical;
-  }
-
-  .productDescription > p {
-    height: 72px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4; /* number of lines to show */
-    -webkit-box-orient: vertical;
-  }
-
-  .productPrice {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
+    width: 30%;
+    height: 440px;
+    text-align: center;
+    margin-bottom: 30px;
   }
   
-  .productPrice > button {
-    height: 32px;
-    background-color: green;
-    color: white;
+  .product-item > img {
+    height: 200px;
+    width: 200px;
+    object-fit: contain;
+  }
+  
+  .product-item > p {
+    text-align: left;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+  
+  .product-item-price {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .product-item-price > span {
+    font-weight: bold;
+  }
+  
+  .product-item-price > button {
+    padding: 10px;
     border: none;
-    border-radius: 5px;
-    padding: 0 15px;
-  }
-
-  .productPrice > button:hover {
+    background-color: green;
     cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+    transition: 0.3s;
   }
-
+  
+  .product-item-price > button:hover {
+    background-color: #0dc00d;
+  }
+  
   /* CART styles */
   
   .cart {
