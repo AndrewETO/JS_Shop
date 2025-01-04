@@ -21,6 +21,7 @@
   .product {
     width: 30%;
     margin-left: 3%;
+    margin-bottom: 50px;
   }
 
   @media (max-width: 720px) {
@@ -80,6 +81,27 @@
 
   .productPrice > button:hover {
     cursor: pointer;
+  }
+
+  .moreProducts {
+    display: flex;
+    justify-content: center;
+  }
+
+  .moreProducts > button {
+    height: 40px;
+    color: #ffffff8e;
+    background-color: rgb(74, 219, 255);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0 15px;
+    font-size: 20px;
+  } 
+
+  .moreProducts > button:hover {
+    cursor: pointer;
+    background-color: rgb(40, 212, 255);
   }
 
   /* CART styles */
