@@ -61,6 +61,13 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .productPrice > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
   
   .productPrice > button {
     height: 32px;

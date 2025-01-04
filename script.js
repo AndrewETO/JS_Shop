@@ -24,7 +24,7 @@ fetch("https://fakestoreapi.in/api/products")
         productDescription.append(image, title, description)
 
         const price = document.createElement('span');
-        price.innerHTML = res.products[i].price;
+        price.innerHTML = `${res.products[i].price} $`;
         const button = document.createElement('button');
         button.innerHTML = "Add to cart"
         productPrice.append(price, button)
