@@ -27,14 +27,28 @@
     </div>
     <div class="cart">
       <h2>Cart</h2>
-      <p class="cart-empty-title">Your cart is empty</p>
-      <div class="cart-list-wrapper">
-        <section class="cart-list-titles">
+      <p class="cartEmptyTitle">Your cart is empty</p>
+      <div class="cartListContainer">
+        <section class="cartListTitles">
           <h4 class="cart-list-item-title">Item</h4>
           <h4 class="cart-list-price-title">Price</h4>
           <h4 class="cart-list-quantity-title">Quantity</h4>
         </section>
-        <ul class="cart-list"></ul>
+        <ul class="cartList">
+          <li>
+            <div class="cartListItem">
+              <img class="cartListItemImage" src="" alt="IMAGE">
+              <span class="cartListItemDescription">Some text</span>
+            </div>
+            <div class="cartListPrice">
+              <h4>10.99$</h4>
+            </div>
+            <div class="cartListQuantity">
+              <input type="number">
+              <Button>Remove</Button>
+            </div>
+          </li>
+        </ul>
         <h3 class="total-amount">Total <span>0</span></h3>
       </div>
     </div>

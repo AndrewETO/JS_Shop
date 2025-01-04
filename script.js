@@ -33,9 +33,9 @@ fetch("https://fakestoreapi.in/api/products")
         }
         
     }
-    for(let i = 0; i < 6; i++) {
-        renderProducts(i)
-    }
+    // for(let i = 0; i < 6; i++) {
+    //     renderProducts(i)
+    // }
 
     const showMore = document.querySelector(".moreProducts");
     let counterMin = 6;
@@ -47,5 +47,9 @@ fetch("https://fakestoreapi.in/api/products")
         counterMin+=6; 
         counterMax+=6;
     })   
+
+    const cartItemImage = document.querySelector(".cartListItemImage");
+    console.log(cartItemImage)
+    cartItemImage.src = res.products[48].image;
 
 })
