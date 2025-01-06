@@ -2,6 +2,9 @@ fetch("https://fakestoreapi.in/api/products")
 .then(res => res.json())
 .then(res => {
     console.log(res.products)
+    let cartArray = [];
+    const cartListContainer = document.querySelector('.cartListContainer');
+    cartListContainer.classList.add('cartListContainerEmpty');
 
     function renderProducts(i) {
         if (i < res.products.length) {
@@ -28,14 +31,60 @@ fetch("https://fakestoreapi.in/api/products")
             const price = document.createElement('span');
             price.innerHTML = `${res.products[i].price} $`;
             const button = document.createElement('button');
-            button.innerHTML = "Add to cart"
+            button.innerHTML = "Add to cart";
+            button.addEventListener('click', () => {
+                cartRender(i)
+                cartArray.push(i)
+                console.log(cartArray)
+                if(cartArray.length > 0) {
+                    cartListContainer.classList.remove('cartListContainerEmpty')
+                } else {
+                    cartListContainer.classList.add('cartListContainerEmpty');
+                }
+            })
             productPrice.append(price, button)
-        }
-        
+        }        
     }
-    // for(let i = 0; i < 6; i++) {
-    //     renderProducts(i)
-    // }
+
+    function cartRender(index) {
+       const cartList = document.querySelector(".cartList");
+       cartList.classList.add('cartList');
+       const cartListLi = document.createElement('li');
+       cartList.appendChild(cartListLi)
+
+       const cartListItem = document.createElement('div');
+       cartListItem.classList.add('cartListItem');
+       const cartListItemImage = document.createElement('img');
+       cartListItemImage.classList.add('cartListItemImage');
+       cartListItemImage.src = res.products[index].image;
+       const cartListItemSpan = document.createElement('span');
+       cartListItemSpan.innerHTML = res.products[index].title;
+       cartListItem.append(cartListItemImage, cartListItemSpan);
+
+       const cartListPrice = document.createElement('div');
+       cartListPrice.classList.add('cartListPrice');
+       const cartListPriceText = document.createElement('h4');
+       cartListPriceText.innerHTML = `${res.products[index].price}$`;
+       cartListPrice.appendChild(cartListPriceText);
+
+       const cartListQuantity = document.createElement('div');
+       cartListQuantity.classList.add('cartListQuantity');
+       const cartListQuantityInput = document.createElement('input');
+       cartListQuantityInput.type = "number";
+       const cartListQuantityButton = document.createElement("button");
+       cartListQuantityButton.innerHTML = "Remove";
+       cartListQuantityButton.addEventListener('click', () => {
+        cartListLi.remove();
+       })
+       cartListQuantity.append(cartListQuantityInput, cartListQuantityButton)
+
+       cartListLi.append(cartListItem, cartListPrice, cartListQuantity)
+       
+    }
+
+    for(let i = 0; i < 6; i++) {
+        renderProducts(i)
+    }
 
     const showMore = document.querySelector(".moreProducts");
     let counterMin = 6;
@@ -48,8 +97,5 @@ fetch("https://fakestoreapi.in/api/products")
         counterMax+=6;
     })   
 
-    const cartItemImage = document.querySelector(".cartListItemImage");
-    console.log(cartItemImage)
-    cartItemImage.src = res.products[48].image;
-
+    
 })

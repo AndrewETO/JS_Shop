@@ -111,9 +111,12 @@
   }
   
   .cartListContainer {
-    /* display: none; */
     width: 90%;
     margin: 0 auto;
+  }
+
+  .cartListContainerEmpty {
+    display: none;
   }
   
   .cartList {
@@ -142,10 +145,17 @@
   } 
 
   .cartListItem > span {
+    width: 50%;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
+  }
+
+  @media(max-width: 720px) {
+    .cartListItem > span {
+      display: none;
+    }
   }
   
   .cartListPrice {
