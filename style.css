@@ -198,12 +198,12 @@
   }
   
   
-  .total-amount {
+  .totalContainer {
     text-align: right;
     font-weight: normal;
   }
   
-  .total-amount > span {
+  .totalContainer > span {
     margin-left: 10px;
     font-weight: bold;
   }
