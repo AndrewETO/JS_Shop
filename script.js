@@ -3,13 +3,13 @@ fetch("https://fakestoreapi.in/api/products")
 .then(res => {
     console.log(res.products)
     let cartArray = [];
+    let itemsInCart = [];
+    let totalValue = 0;
     const cartListContainer = document.querySelector('.cartListContainer');
     cartListContainer.classList.add('cartListContainerEmpty');
     const cartList = document.querySelector(".cartList");
     const cartEmptyTitle = document.querySelector('.cartEmptyTitle');
-    const total = document.querySelector('.total');
-
-    let totalValue = 0;
+    const total = document.querySelector('.total');    
 
     function renderProducts(i) {
         if (i < res.products.length) {
@@ -40,24 +40,23 @@ fetch("https://fakestoreapi.in/api/products")
             button.addEventListener('click', () => {
                 if(!cartArray.includes(res.products[i])) {
                     cartArray.push(res.products[i])
-                    cartList.innerHTML = '';
-                    totalValue = 0;
-                    cartArray.map((product) => {
-                        cartRender(product)
-                        totalValue += product.price;
+                    itemsInCart.push({
+                        "id" : res.products[i].id,
+                        "price" : res.products[i].price,
+                        "quantity" : 1
                     })
+                    createCartItem(res.products[i])
                     cartListContainer.classList.remove('cartListContainerEmpty');
                     cartEmptyTitle.innerHTML = "";
-                    total.innerHTML = `${totalValue}$`;
-                }                
+                    calcTotal(itemsInCart);
+                }   
             })
             productPrice.append(price, button)
         }        
     }
 
-    function cartRender(product) {
+    function createCartItem(product) {
         
-            cartList.classList.add('cartList');
             const cartListLi = document.createElement('li');
             cartList.appendChild(cartListLi)
      
@@ -83,37 +82,42 @@ fetch("https://fakestoreapi.in/api/products")
             cartListQuantityInput.min = "1";
             cartListQuantityInput.value = 1;
             cartListQuantityInput.addEventListener('change', () => {
-                totalValue = 0;
-                itemsQuantity = cartListQuantityInput.value;
-                cartArray.map((product) => {
-                   totalValue += product.price;
-               })
-               totalValue = totalValue + product.price * itemsQuantity - product.price;
-               total.innerHTML = `${totalValue}$`;
+                itemsInCart.map((item) => {
+                    if(item.id == product.id) {
+                        item.quantity = cartListQuantityInput.value;
+                    }
+                })
+                calcTotal(itemsInCart)
             })
             const cartListQuantityButton = document.createElement("button");
             cartListQuantityButton.innerHTML = "Remove";
             cartListQuantityButton.addEventListener('click', () => {
-             cartListLi.remove();
-             cartArray = cartArray.filter((item) => {
-                return item != product;
-             })
-             cartList.innerHTML = ''
-             totalValue = 0;
-             cartArray.map((product) => {
-                cartRender(product);
-                totalValue += product.price;
-            })
-             if(cartArray.length == 0) {
-                cartListContainer.classList.add('cartListContainerEmpty');
-                cartEmptyTitle.innerHTML = "Your cart is empty";
-             }
-             total.innerHTML = `${totalValue}$`;
+                cartListLi.remove();
+                cartArray = cartArray.filter((item) => {
+                    return item != product;
+                })
+                itemsInCart = itemsInCart.filter((item) => {
+                    return item.id != product.id;
+                })
+                calcTotal(itemsInCart);
+                if(cartArray.length == 0) {
+                    cartEmptyTitle.innerHTML = "Your cart is empty";
+                    cartListContainer.classList.add('cartListContainerEmpty');
+                }
+             
             })
             cartListQuantity.append(cartListQuantityInput, cartListQuantityButton)
      
             cartListLi.append(cartListItem, cartListPrice, cartListQuantity)
        
+    }
+
+    function calcTotal(array) {
+        totalValue = 0;
+        array.forEach((item) => {
+            totalValue += item.price*item.quantity;
+            total.innerHTML = `${totalValue}$`;
+        })
     }
 
     for(let i = 0; i < 6; i++) {
